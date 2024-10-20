@@ -1,10 +1,10 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
-import { deleteUser, getAllUsers } from '../controllers/userControllers.js';
-import { sendResponse } from '../utils/responseHelper.js';
+import { deleteUser, getAllUsers } from '../controllers/userControllers.ts';
+import { sendResponse } from '../utils/responseHelper.ts';
 import { parse } from 'url';
-import { getUserById } from '../controllers/userControllers.js';
-import { createUser } from '../controllers/userControllers.js';
-import { updateUser } from '../controllers/userControllers.js';
+import { getUserById } from '../controllers/userControllers.ts';
+import { createUser } from '../controllers/userControllers.ts';
+import { updateUser } from '../controllers/userControllers.ts';
 
 export const handleUserRoutes = (request: IncomingMessage, response: ServerResponse) => {
   const parseURL = parse(request.url || '', true);

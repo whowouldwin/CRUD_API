@@ -1,10 +1,11 @@
-import { User } from '../models/user.js';
-import { sendResponse } from '../utils/responseHelper.js';
+import { User } from '../models/user.ts';
+import { sendResponse } from '../utils/responseHelper.ts';
 import { IncomingMessage, ServerResponse } from 'node:http';
-import { users } from '../models/user.js';
-import { parseRequestBody } from '../utils/bodyParser.js';
+import { users } from '../models/user.ts';
+import { parseRequestBody } from '../utils/bodyParser.ts';
 import { v4 as uuidv4, validate as uuidValidate } from 'uuid';
-import { handleServerError } from '../utils/errorHandler.js';
+import { handleServerError } from '../utils/errorHandler.ts';
+
 
 export const getAllUsers = async (response: ServerResponse) => {
   try {
