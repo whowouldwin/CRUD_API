@@ -41,3 +41,26 @@ export const createUser = async (request: IncomingMessage, response: ServerRespo
     return sendResponse(response, 400, { message: 'Invalid request body. Could not parse JSON file'});
   }
 }
+
+export const updateUser = async (userId: string, request: IncomingMessage, response: ServerResponse) => {
+  if(!uuidValidate(userId)) {
+    return sendResponse(response, 400, { message: 'Invalid user id. Must be a valid UUID'})
+  }
+
+  const user = users.find((u) => u.id === userId)
+  if (!user) {
+    return sendResponse(response, 404, { message: 'User with id ${userId} does not exist'} );
+  }
+
+  try {
+    const body: User = await parseRequestBody(request);
+    user.username = body.username;
+    user.age = body.age;
+    user.hobbies = body.hobbies;
+
+    return sendResponse(response, 200, user);
+
+  } catch (e) {
+    return sendResponse(response, 400, { message: 'Invalid request body. Could not parse JSON file'});
+  }
+}
