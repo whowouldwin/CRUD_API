@@ -7,11 +7,7 @@ dotenv.config();
 
 
 const server = createServer((req: IncomingMessage, res: ServerResponse) => {
-  if(req.url?.startsWith('/api/users')) {
-    handleUserRoutes(req, res);
-  } else {
-    sendResponse(res, 404, { message: 'Not found.' });
-  }
+  handleUserRoutes(req, res);
 });
 
 const PORT = process.env.PORT || 3000;
