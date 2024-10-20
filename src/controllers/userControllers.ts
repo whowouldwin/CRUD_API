@@ -64,3 +64,17 @@ export const updateUser = async (userId: string, request: IncomingMessage, respo
     return sendResponse(response, 400, { message: 'Invalid request body. Could not parse JSON file'});
   }
 }
+
+export const deleteUser = async (userId: string, response: ServerResponse) => {
+  if(!uuidValidate(userId)) {
+    return sendResponse(response, 400, { message: 'Invalid user id. Must be a valid UUID'})
+  }
+  const userIndex = users.findIndex((u) => u.id === userId)
+  if (userIndex === -1) {
+    return sendResponse(response, 404, { message: 'User with id ${userId} does not exist'} );
+  }
+
+  users.splice(userIndex, 1);
+
+  return sendResponse(response, 204, null)
+}

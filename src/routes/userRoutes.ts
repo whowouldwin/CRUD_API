@@ -1,5 +1,5 @@
 import { IncomingMessage, ServerResponse } from 'node:http';
-import { getAllUsers } from '../controllers/userControllers.js';
+import { deleteUser, getAllUsers } from '../controllers/userControllers.js';
 import { sendResponse } from '../utils/responseHelper.js';
 import { parse } from 'url';
 import { getUserById } from '../controllers/userControllers.js';
@@ -23,6 +23,10 @@ export const handleUserRoutes = (request: IncomingMessage, response: ServerRespo
   } else if (request.method === 'PUT' && pathParts?.length === 3 && pathParts[1] === 'users') {
     const userId = pathParts[2];
     return updateUser(userId, request, response);
+
+  } else if (request.method === 'DELETE' && pathParts?.length === 3 && pathParts[1] === 'users') {
+    const userId = pathParts[2];
+    return deleteUser(userId,response);
 
   } else {
     sendResponse(response, 404, { message: 'Not found.' });
