@@ -23,20 +23,8 @@ export const getUserById = async (id: string, response: ServerResponse) => {
 
 export const createUser = async (request: IncomingMessage, response: ServerResponse) => {
   try {
-    const body = await parseRequestBody(request);
-    const { username, age, hobbies } = body;
-    if (typeof username !== 'string') {
-      return sendResponse(response, 400, { message: 'Invalid request. Username must be a string'} );
-    }
-    if (typeof age !== 'number') {
-      return sendResponse(response, 400, { message: 'Invalid request. Age must be a number'} );
-    }
-    if (!Array.isArray(hobbies)) {
-      return sendResponse(response, 400, { message: 'Invalid request. Hobbies must be an array'} );
-    }
-    if (hobbies.some((h) => typeof h !== 'string')) {
-      return sendResponse(response, 400, { message: 'Invalid request. Each hobby must be a string'} );
-    }
+    const body: User = await parseRequestBody(request);
+    const {username, age, hobbies } = body
 
     const newUser: User = {
       id: uuidv4(),
