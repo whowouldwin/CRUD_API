@@ -3,7 +3,6 @@ import server from '../src/index.ts';
 import { users } from '../src/models/user.ts';
 
 describe('user API tests', () => {
-  // let userId: string;
 
   beforeEach(() => {
     users.length = 0;
